@@ -1,0 +1,25 @@
+1.La manipulación de ficheros mmap (mapeado a memoria) tiene la ventaja de que no es necesario utilizar explicitamente las funciones read/write ya que podemos acceder al contenido del fichero como si fuera un vector. Otra ventaja es que el sistema operativo se encarga de llevar a la memoria solamente los bloques necesarios del fichero.
+
+2.No, solo se carga en memoria los bloques necesarios para la ejecución en el momento. Más especificamente, el sistema operativo carga a la memoria las páginas del disco a medida que se va ejecutando el archivo.
+
+3.No, cada vez que se realiza una substituición el sistema operativo se encarega de guardar la parte necesaria a la memoria. El proceso de guardar a disco lo hace el sistema operativo internamente.
+
+2.1 El sistema operativo situará el proceso en un nivel con remanada de tiempo baja (10ms). Porque una operación como la lectura de datos de disco requiere una carga de entrada-sortida y necesita muy poco tiempo de CPU, por lo tanto debemos priorizar ese proceso a fin de obtener una mayor eficiencia.
+
+2.2 Este proceso se quedará en el nivel con remanada de tiempo baja (10 ms) ya que se bloqueará cuando acabe su ejecución, teniendo en cuenta que requiere menos de 10ms de CPU.
+
+3.1. Se utilizan tablas multinivel porque permite cargar a la memoria solo las partes del árbol que realmente son utilizadas por el proceso. Mientras que en una mesa plana se tendría que cargar en menoria toda la tabla
+
+3.2 Sí, al utilizar una tabla multinivel se requiere accesos  memoria a la durante la traducción, ya en una tabla plana no se requiere.
+
+3.3 El sistema operativo lo permite hacer porque realmente se ha hecho la reserva de los 20GB de datos al espacio de memoria virtual y no al espacio de memoria fisica.
+
+3.4 El sistema operativo asgina a la memoria fisica solo las páginas necesarias en aquel momento para la ejecución del proceso, en este caso asigna al acceder a una posición del vector para escritura. Una vez se haya llenado la memoria el sistema operativo utiliza un algorismo para descatar los marcos de página menos utilizados recentemente.
+
+3.5 Sí, porque cada vez que necesitaremos otro proceso/dato que no esté en la memoria fisica se produirá un fallo de página y sera necesario buscar a disco la información, operación que es muy costosa en termos de tiempo por lo tanto puede reducir el rendimiento del ordenador.
+
+3.6 Los cambios de los apartados b) y c) pueden afectar el rendimiento. 
+La proposta del apartado b) ayudaria en el rendimiento ya que reduciria el tiempo de aceso al disco.
+La proposta del apartado c) ayudaria en el rendimineto ya que diminuiria el numero de accesos al disco, teniendo en cuenta que almacenaria más datos en la memoria fisica.
+Las propostas de los apartados a) y d) son desprezibles en el caso descrito en el apartado anterior pues no reduce el tiempo de acceso o el numero de accesos al disco. 
+

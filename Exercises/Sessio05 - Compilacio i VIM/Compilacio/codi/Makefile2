@@ -1,0 +1,27 @@
+
+COPTS=-g -Wall -Werror 
+TARGET=myprog
+
+FILES_C = $(shell ls *.c)
+FILES_O = $(subst .c,.o,$(FILES_C))
+
+# Objetivo general
+default: $(TARGET)
+
+# Regla implicita: como generar ficheros .o a partir de .c
+%.o: %.c 
+	gcc $(COPTS) -c $< -o $@  
+
+# Generacion de la libreria
+libmyutils.a: calculator.o counter.o 
+	ar rcs libmyutils.a calculator.o counter.o
+
+# Generacion del ejecutable
+$(TARGET): main.o libmyutils.a 
+	gcc main.o libmyutils.a -o $(TARGET) -lm
+
+# Borrar ficheros
+clean:
+	/bin/rm -f *.o libmyutils.a $(TARGET)
+
+
